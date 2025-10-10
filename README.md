@@ -10,3 +10,4 @@ A Flutter application that displays spending insights across various categories 
    ```bash
    git clone <your-repo-url>
    cd finely_app
+flutter pub get
