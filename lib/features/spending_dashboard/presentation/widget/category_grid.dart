@@ -123,7 +123,7 @@ Widget categoryGrid(List<Category> categories) {
 
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
-        childAspectRatio: 0.6,
+        childAspectRatio: 0.58,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
       ),
@@ -140,12 +140,12 @@ Widget categoryGrid(List<Category> categories) {
         return GestureDetector(
           onTap: () => _showCategoryDetail(c,context),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(left: 8.0,bottom: 4.0),
             child: ListView(
               children: [
                 // Category Name
                 SizedBox(
-                  height: 20,
+                  height: 15,
                   child: Text(
                     c.displayName,
                     style: const TextStyle(
@@ -180,16 +180,18 @@ Widget categoryGrid(List<Category> categories) {
                 Text(
                   currency.format(c.spendRemaining),
                   style: const TextStyle(
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,
+                  maxLines: 1, // optional, prevents overflow
+                  overflow: TextOverflow.ellipsis, // optional, shows '...' if text is long
                 ),
                 // Status text
                 Text(
                   statusText,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 10, color: Colors.grey[700]),
+                  style: TextStyle(fontSize: 12, color: Colors.grey[700]),
                 ),
               ],
             ),
