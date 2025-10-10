@@ -9,7 +9,7 @@ A Flutter application that displays spending insights across various categories 
 1. **Clone the repository**
    ```bash
    git clone https://github.com/adhwale32/finley_app.git
-   cd finely_app
+   cd finley_app
    
 2. **Install Flutter dependencies**
    ```bash
