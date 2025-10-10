@@ -1,3 +1,5 @@
+import 'package:finely_app/core/helpers/bottom_navigation_items.dart';
+import 'package:finely_app/core/helpers/snackbar_helper.dart';
 import 'package:finely_app/core/utility/curve_container.dart';
 import 'package:finely_app/features/greeting/widget/GreetingHeader.dart';
 import 'package:finely_app/features/spending_dashboard/presentation/widget/spending_category.dart';
@@ -50,44 +52,57 @@ class _DashboardPageState extends State<DashboardPage> {
       actions: [
         IconButton(
           icon: Icon(Icons.copy, color: Colors.grey[800]),
-          onPressed: () {},
+          onPressed: () {
+            SnackBarHelper.show(
+              context,
+              'Clicked on Copy Icon',
+            );
+          },
         ),
         IconButton(
           icon: Icon(Icons.share, color: Colors.grey[800]),
-          onPressed: () {},
+          onPressed: () {
+            SnackBarHelper.show(
+              context,
+              'Clicked on Share Icon',
+            );
+          },
         ),
         IconButton(
           icon: Icon(Icons.lock, color: Colors.grey[800]),
-          onPressed: () {},
+          onPressed: () {
+            SnackBarHelper.show(
+              context,
+              'Clicked on Lock Icon',
+            );
+          },
         ),
       ],
     );
   }
 
   _bottomNavigation() {
+    var navList = BottomNavItem.navItems;
     return BottomNavigationBar(
       currentIndex: _currentIndex,
       onTap: (i) {
         if (i == 2) {
           setState(() => _currentIndex = 2);
         } else {
-          ScaffoldMessenger.of(
+          SnackBarHelper.show(
             context,
-          ).showSnackBar(SnackBar(content: Text('Placeholder for tab ${i}')));
+            'Placeholder for tab ${navList[i].label}',
+          );
         }
       },
-      items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.smart_toy),
-          label: 'Finley AI',
+      items: navList
+          .map(
+            (item) =>
+            BottomNavigationBarItem(
+              icon: Icon(item.icon),
+              label: item.label,
         ),
-        BottomNavigationBarItem(icon: Icon(Icons.pie_chart), label: 'Spending'),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person_search),
-          label: 'Meet Coach',
-        ),
-      ],
+      ).toList(),
       selectedItemColor: Color(0xFF00C853),
       unselectedItemColor: Colors.grey,
       showUnselectedLabels: true,
@@ -103,7 +118,11 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
       bottomNavigationBar: _bottomNavigation(),
       body: ListView(
-        children: [greetingHeader(), _locationInsight(), spendingByCategory()],
+        children: [
+          greetingHeader(context),
+          _locationInsight(),
+          spendingByCategory()
+        ],
       ),
     );
   }

@@ -1,6 +1,7 @@
+import 'package:finely_app/core/helpers/snackbar_helper.dart';
 import 'package:flutter/material.dart';
 
-Widget greetingHeader() {
+Widget greetingHeader(BuildContext context) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
     child: SizedBox(
@@ -13,8 +14,21 @@ Widget greetingHeader() {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-          IconButton(onPressed: () {}, icon: Icon(Icons.notifications_none)),
-          CircleAvatar(child: Icon(Icons.person)),
+          IconButton(onPressed: () {
+            SnackBarHelper.show(
+              context,
+              'Clicked on Notification Icon',
+            );
+          }, icon: Icon(Icons.notifications_none)),
+
+          CircleAvatar(
+              child: IconButton(onPressed: () {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(
+                    SnackBar(content: Text('Clicked on Profile Icon')));
+              }, icon: Icon(Icons.person))
+          ),
         ],
       ),
     ),
